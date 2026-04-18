@@ -98,10 +98,10 @@ RegisterNetEvent('lopestorm-detective:client:BeginPhase1', function(caseId)
     isOnDuty = true
     activeCase = caseId
     currentPhase = 1
-    QBCore.Functions.Notify(Config.Casos[activeCase].Historia, "primary", 8000)
+    QBCore.Functions.Notify(Config.Casos[activeCase].StoryTelling, "primary", 8000)
 
     -- Início do Temporizador vai primeiro para ser à prova de falhas!
-    local extraMinutes = Config.Casos[activeCase].TempoMinutos or 20
+    local extraMinutes = Config.Casos[activeCase].MinutesToResolve or 20
     missionTimeRemaining = extraMinutes * 60 -- Conversão para segundos
     missionTimerActive = true
     QBCore.Functions.Notify("O Gabinete do Chefe lhe deu " .. extraMinutes .. " minutos contados para investigar tudo antes de a imprensa invadir o local!", "primary", 10000)
@@ -148,7 +148,7 @@ RegisterNetEvent('lopestorm-detective:client:BeginPhase1', function(caseId)
                 missionTimerActive = false
                 break
             else
-                local tot = Config.Casos[activeCase].TempoMinutos or 20
+                local tot = Config.Casos[activeCase].MinutesToResolve or 20
                 local mins = math.floor(missionTimeRemaining / 60)
                 local elapsed = tot - mins
                 
@@ -423,7 +423,7 @@ RegisterNetEvent('lopestorm-detective:client:OpenDossier', function()
     if currentPhase > 3 then currentMoney = currentMoney + Config.Rewards.step_3 end
 
     local remMins = math.floor(missionTimeRemaining / 60)
-    local totMins = Config.Casos[activeCase].TempoMinutos or 20
+    local totMins = Config.Casos[activeCase].MinutesToResolve or 20
     local pPerc = (remMins / totMins) * 100
     local timeColor = 'green'
     if pPerc <= 20 then
@@ -442,7 +442,7 @@ RegisterNetEvent('lopestorm-detective:client:OpenDossier', function()
         end,
         options = {
             {
-                title = 'Caso: ' .. Config.Casos[activeCase].Historia,
+                title = 'Caso: ' .. Config.Casos[activeCase].StoryTelling,
                 icon = 'briefcase',
                 readOnly = true,
             },

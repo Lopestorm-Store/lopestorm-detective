@@ -1,6 +1,6 @@
 Config = {}
 
-Config.Debug = true
+Config.Debug = false -- Habilita funções de debug (debugcasos e limpardebug)
 
 Config.RequireJob = false -- Defina para true e informe o cargo abaixo se for exclusivo.
 Config.JobName = "policia"
@@ -17,18 +17,18 @@ Config.Vehicle = {
 }
 
 Config.Rewards = {
-    step_1 = 50,
-    step_2 = 100,
-    step_3 = 200,
-    step_4 = 300,
-    final = 600
+    step_1 = 50,    -- Recompensa da etapa 1: Encontrou o corpo (50% a 150%)
+    step_2 = 100,   -- Recompensa da etapa 2: Achou a prova (50% a 150%)
+    step_3 = 200,   -- Recompensa da etapa 3: Hackeou o veículo (50% a 150%)
+    step_4 = 300,   -- Recompensa da etapa 4: Prendeu o suspeito (50% a 150%)
+    final = 600     -- Recompensa final: Relatório aprovado (50% a 150%)
 }
 
 Config.Casos = {
     -- ======== CASO 1: Homicídio no Beco (Testes) ========
     [1] = {
-        TempoMinutos = 12, 
-        Historia = "Um homicídio foi reportado pelas redondezas. Vá até o local do crime nas pressas!",
+        MinutesToResolve = 12, 
+        StoryTelling = "Um homicídio foi reportado pelas redondezas. Vá até o local do crime nas pressas!",
         CrimeScene = {
             model = "a_m_y_stbla_01", 
             coords = vec4(458.04, -963.27, 27.37, 22.01),
@@ -54,8 +54,8 @@ Config.Casos = {
     },
     -- ======== CASO 2: Tráfico na Praia de Vespucci ========
     [2] = {
-        TempoMinutos = 15, 
-        Historia = "Turistas apavorados denunciaram um corpo na areia da praia de Vespucci. Vá pra lá rápido!",
+        MinutesToResolve = 15, 
+        StoryTelling = "Turistas apavorados denunciaram um corpo na areia da praia de Vespucci. Vá pra lá rápido!",
         CrimeScene = {
             model = "a_m_y_beach_01", 
             coords = vec4(-1218.4, -1533.8, 3.4, 114.0), -- Areia da praia
@@ -82,8 +82,8 @@ Config.Casos = {
     
     -- ======== CASO 3: Assassinato no Parque (Mirror Park) ========
     [3] = {
-        TempoMinutos = 14, 
-        Historia = "Alguém ouviu tiros durante a noite no lago do Mirror Park. Verifique a área das árvores!",
+        MinutesToResolve = 14, 
+        StoryTelling = "Alguém ouviu tiros durante a noite no lago do Mirror Park. Verifique a área das árvores!",
         CrimeScene = {
             model = "a_m_y_vinewood_01", 
             coords = vec4(1048.2, -737.5, 56.5, 90.0), -- Árvores no Mirror Park
@@ -110,8 +110,8 @@ Config.Casos = {
 
     -- ======== CASO 4: Queima de Arquivo em Paleto Bay ========
     [4] = {
-        TempoMinutos = 28, 
-        Historia = "Um fazendeiro encontrou um corpo nas proximidades rurais de Paleto Bay. É longe, pegue a rodovia!",
+        MinutesToResolve = 28, 
+        StoryTelling = "Um fazendeiro encontrou um corpo nas proximidades rurais de Paleto Bay. É longe, pegue a rodovia!",
         CrimeScene = {
             model = "s_m_y_garbage", 
             coords = vec4(-111.4, 6451.9, 30.4, 180.0), -- Paleto Bay centro
@@ -138,8 +138,8 @@ Config.Casos = {
 
     -- ======== CASO 5: Máfia do Deserto em Sandy Shores ========
     [5] = {
-        TempoMinutos = 22, 
-        Historia = "Tiroteio intenso no deserto de Sandy Shores deixou um turista morto. A prefeitura exige respostas rápidas.",
+        MinutesToResolve = 22, 
+        StoryTelling = "Tiroteio intenso no deserto de Sandy Shores deixou um turista morto. A prefeitura exige respostas rápidas.",
         CrimeScene = {
             model = "a_m_m_tramp_01", 
             coords = vec4(1530.5, 3776.3, 33.5, 0.0), -- Marina Dr (Sandy Shores)
@@ -166,8 +166,8 @@ Config.Casos = {
 
     -- ======== CASO 6: Dívidas no Cassino Diamond ========
     [6] = {
-        TempoMinutos = 14, 
-        Historia = "Um endividado perdeu a vida no estacionamento do Cassino. Pode ter envolvimento de agiotas de luxo.",
+        MinutesToResolve = 14, 
+        StoryTelling = "Um endividado perdeu a vida no estacionamento do Cassino. Pode ter envolvimento de agiotas de luxo.",
         CrimeScene = {
             model = "a_m_y_business_01", 
             coords = vec4(928.3, -29.8, 77.7, 55.0), -- Estacionamento aberto do cassino
@@ -194,8 +194,8 @@ Config.Casos = {
 
     -- ======== CASO 7: O Caso da Praça Principal (Legion Square) ========
     [7] = {
-        TempoMinutos = 12, 
-        Historia = "Corpo avistado em um dos bancos da Legion Square no centro da cidade. Mantenha os civis afastados!",
+        MinutesToResolve = 12, 
+        StoryTelling = "Corpo avistado em um dos bancos da Legion Square no centro da cidade. Mantenha os civis afastados!",
         CrimeScene = {
             model = "a_m_y_runner_01", 
             coords = vec4(184.2, -943.5, 29.1, 90.0), -- Dentro da Legion Square
@@ -222,8 +222,8 @@ Config.Casos = {
 
     -- ======== CASO 8: Terror no Porto de Los Santos ========
     [8] = {
-        TempoMinutos = 16, 
-        Historia = "Guarda portuário achou um cadáver próximo aos contêineres de carga nas docas do Terminal.",
+        MinutesToResolve = 16, 
+        StoryTelling = "Guarda portuário achou um cadáver próximo aos contêineres de carga nas docas do Terminal.",
         CrimeScene = {
             model = "s_m_m_dockwork_01", 
             coords = vec4(72.34, -2741.86, 5.0, 180.0), -- Entradas do Porto
@@ -250,8 +250,8 @@ Config.Casos = {
 
     -- ======== CASO 9: Assassinato Estudantil (Vinewood Central) ========
     [9] = {
-        TempoMinutos = 14, 
-        Historia = "Universitário sumiu e seu corpo foi descartado nos asfaltos chiques do centro de Vinewood.",
+        MinutesToResolve = 14, 
+        StoryTelling = "Universitário sumiu e seu corpo foi descartado nos asfaltos chiques do centro de Vinewood.",
         CrimeScene = {
             model = "a_m_y_vinewood_02", 
             coords = vec4(310.2, 189.5, 103.05, 90.0), -- Asfalto central Vinewood
@@ -278,8 +278,8 @@ Config.Casos = {
 
     -- ======== CASO 10: Caos no Aeroporto Internacional ========
     [10] = {
-        TempoMinutos = 17, 
-        Historia = "Corpo ejetado de um veículo de luxo nos desembarques do Aeroporto de LS. Resolva o mais rápido possível!",
+        MinutesToResolve = 17, 
+        StoryTelling = "Corpo ejetado de um veículo de luxo nos desembarques do Aeroporto de LS. Resolva o mais rápido possível!",
         CrimeScene = {
             model = "s_m_m_highsec_01", 
             coords = vec4(-1055.2, -2700.5, 12.81, 90.0), -- Terminal Térreo externo do Aeroporto
@@ -306,8 +306,8 @@ Config.Casos = {
 
     -- ======== CASO 11: Misticismo no Cemitério (Pacific Bluffs) ========
     [11] = {
-        TempoMinutos = 17, 
-        Historia = "Coveiros entraram em pânico! Denunciaram um caixão violado acompanhado de um corpo fresco no Cemitério.",
+        MinutesToResolve = 17, 
+        StoryTelling = "Coveiros entraram em pânico! Denunciaram um caixão violado acompanhado de um corpo fresco no Cemitério.",
         CrimeScene = {
             model = "u_m_y_zombie_01", 
             coords = vec4(-1650.2, -200.5, 54.2, 90.0), -- Gramado plano dentro do cemitério

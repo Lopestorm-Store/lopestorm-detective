@@ -1,8 +1,8 @@
 fx_version 'cerulean'
 game 'gta5'
 
-author 'Fabio'
-description 'Criminal Investigator ARG Job'
+author 'Lopestorm'
+description 'Trabalho de Investigador de casos - ARG'
 version '1.0.0'
 
 shared_scripts {
