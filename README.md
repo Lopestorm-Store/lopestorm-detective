@@ -16,11 +16,18 @@ Bem-vindo ao **Lopestorm Detective**, um sistema imersivo de investigação crim
 
 ## Imagens e Demonstração
 
-*(Adicione imagens aqui para exemplificar a sua obra. Dicas de imagens interessantes para subir no GitHub:)*
+O script interage dinamicamente com as mecânicas policiais da sua base, permitindo total profundidade do Roleplay em campo:
 
-1. ![Imagem do Tablet de Progresso da Missão](link_da_imagem_tablet_aqui.png) - *Interface de exibição.*
-2. ![Print do NPC de Hacking](link_da_preview_aqui.png) - *Investigador hackeando a van preta na rua.*
-3. ![Aviso de Tempo Expirando](link_para_notificacao_urgente.png) - *O momento de tensão de contagem regressiva.*
+### Interface e Equipamento
+![Tablet Oculto do Investigador](res/tablet.png)
+
+### Cenas de Crime e Coleta
+![Cena Inicial do Crime](res/inicio_investigacao.png)
+
+![De Joelhos Revirando Evidências Fiscais](res/revirando_evidencias.png)
+
+### Descoberta e Extração
+![Hackeamento Central das Facções](res/hacker_furgao.gif)
 
 ---
 
