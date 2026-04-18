@@ -300,11 +300,14 @@ RegisterNetEvent('lopestorm-detective:client:BeginPhase3', function()
 
         SetWaypoint(coords, "Furgão Hacker")
 
-        exports['qb-target']:AddTargetEntity(veh, {
+        exports['qb-target']:AddTargetModel({model}, {
             options = {
                 {
                     icon = "fas fa-network-wired",
                     label = Config.Casos[activeCase].Hacker.label,
+                    canInteract = function()
+                        return currentPhase == 3
+                    end,
                     action = function()
                         local isReady = lib.progressBar({
                             duration = 2000,
@@ -329,14 +332,14 @@ RegisterNetEvent('lopestorm-detective:client:BeginPhase3', function()
                             ClearPedTasks(PlayerPedId())
                             TriggerServerEvent('lopestorm-detective:server:Reward', 3)
                             TriggerEvent('lopestorm-detective:client:BeginPhase4')
-                            exports['qb-target']:RemoveTargetEntity(veh, Config.Casos[activeCase].Hacker.label)
+                            exports['qb-target']:RemoveTargetModel({model}, Config.Casos[activeCase].Hacker.label)
                         else
                             QBCore.Functions.Notify("A Firewall nativa do carro te bloqueou! Concentre-se e pare de tremer.", "error")
                         end
                     end
                 }
             },
-            distance = 2.5
+            distance = 5.0 -- Aumentado para alcançar de trás do furgão longo
         })
     end, coords, true)
 end)
