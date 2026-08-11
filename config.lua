@@ -1,9 +1,19 @@
 Config = {}
 
-Config.Debug = false -- Habilita funções de debug (debugcasos e limpardebug)
+Config.Debug = false -- Habilita funções de debug (debugcasos e limpardebug). Com false, os comandos nem são registrados.
 
 Config.RequireJob = false -- Defina para true e informe o cargo abaixo se for exclusivo.
 Config.JobName = "policia"
+
+Config.Item = "tablet_detetive" -- Nome do item usado como dossiê. Veja shared/items.lua.
+
+Config.MissionCooldown = 5 -- Minutos de espera antes de aceitar um novo caso após terminar/abortar o anterior.
+
+-- Nome do resource de chaves veiculares (deve expor os exports GiveTempKeys/RemoveTempKeys client e server).
+Config.CarKeysResource = "mri_Qcarkeys"
+
+-- Sistemas de combustível testados via pcall, na ordem. Adicione/remova conforme o que sua base usa.
+Config.FuelResources = { "cdn-fuel", "LegacyFuel", "ps-fuel", "ox_fuel" }
 
 -- NPC Inicial (O Despachante ou Delegado que dá o trabalho)
 Config.NPC_Start = {

@@ -114,19 +114,21 @@ RegisterNetEvent('lopestorm-detective:client:BeginPhase1', function(caseId)
             SetEntityHeading(veh, Config.Vehicle.spawnCoords.w)
             workVehiclePlate = plateT
             SetVehicleEngineOn(veh, true, true, false)
-            exports['mri_Qcarkeys']:GiveTempKeys(plateT)
-            
-            -- Reabastecimento universal agressivo (Suporte garantido ao cdn-fuel e outros)
+            exports[Config.CarKeysResource]:GiveTempKeys(plateT)
+
+            -- Avisa o server o netId da viatura, pra ele conseguir limpar sozinho se a gente cair no meio do caso
+            TriggerServerEvent('lopestorm-detective:server:RegisterWorkVehicle', plateT, NetworkGetNetworkIdFromEntity(veh))
+
+            -- Reabastecimento universal agressivo (Suporte garantido aos sistemas listados em Config.FuelResources)
             CreateThread(function()
                 for i = 1, 10 do
                     Wait(500)
                     if DoesEntityExist(veh) then
                         SetVehicleFuelLevel(veh, 100.0)
                         if Entity(veh) then Entity(veh).state.fuel = 100.0 end
-                        pcall(function() exports['cdn-fuel']:SetFuel(veh, 100.0) end)
-                        pcall(function() exports['LegacyFuel']:SetFuel(veh, 100.0) end)
-                        pcall(function() exports['ps-fuel']:SetFuel(veh, 100.0) end)
-                        pcall(function() exports['ox_fuel']:SetFuel(veh, 100.0) end)
+                        for _, fuelResource in ipairs(Config.FuelResources) do
+                            pcall(function() exports[fuelResource]:SetFuel(veh, 100.0) end)
+                        end
                     end
                 end
             end)
@@ -394,11 +396,10 @@ RegisterNetEvent('lopestorm-detective:client:DeleteVehicleAndFinish', function(i
     missionTimerActive = false
     missionTimeRemaining = 0
     
-    if workVehiclePlate then
-        exports['mri_Qcarkeys']:RemoveTempKeys(workVehiclePlate)
-        TriggerEvent('mm_carkeys:client:removetempkeys', workVehiclePlate)
-        workVehiclePlate = nil
-    end
+    -- A remoção da chave temporária e a exclusão da viatura já são feitas pelo server
+    -- (é autoritativo e cobre inclusive o caso de o client cair no meio do trabalho).
+    -- Aqui só limpamos as referências locais e damos um fallback caso a viatura ainda exista.
+    workVehiclePlate = nil
 
     if workVehicle and DoesEntityExist(workVehicle) then
         QBCore.Functions.DeleteVehicle(workVehicle)
@@ -419,11 +420,12 @@ RegisterNetEvent('lopestorm-detective:client:OpenDossier', function()
     end
 
     -- Cálculo simples de estimativa financeira
-    local estTotal = Config.Rewards.step_1 + Config.Rewards.step_2 + Config.Rewards.step_3 + 1500 + Config.Rewards.final
+    local estTotal = Config.Rewards.step_1 + Config.Rewards.step_2 + Config.Rewards.step_3 + Config.Rewards.step_4 + Config.Rewards.final
     local currentMoney = 0
     if currentPhase > 1 then currentMoney = currentMoney + Config.Rewards.step_1 end
     if currentPhase > 2 then currentMoney = currentMoney + Config.Rewards.step_2 end
     if currentPhase > 3 then currentMoney = currentMoney + Config.Rewards.step_3 end
+    if currentPhase > 4 then currentMoney = currentMoney + Config.Rewards.step_4 end
 
     local remMins = math.floor(missionTimeRemaining / 60)
     local totMins = Config.Casos[activeCase].MinutesToResolve or 20
@@ -476,7 +478,7 @@ RegisterNetEvent('lopestorm-detective:client:OpenDossier', function()
                 description = 'Trace uma Rota de GPS direto para a matriz.',
                 icon = 'location-dot',
                 onSelect = function()
-                    SetWaypoint(Config.NPC_Start.coords.x, Config.NPC_Start.coords.y)
+                    SetWaypoint(Config.NPC_Start.coords, "Delegacia Central")
                     QBCore.Functions.Notify("GPS marcado para a Delegacia Central.", "success")
                 end
             }

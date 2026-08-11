@@ -3,11 +3,12 @@ game 'gta5'
 
 author 'Lopestorm'
 description 'Trabalho de Investigador de casos - ARG'
-version '1.0.0'
+version '2.0.0'
 
 shared_scripts {
     '@ox_lib/init.lua',
-    'config.lua'
+    'config.lua',
+    'shared/items.lua'
 }
 
 client_scripts {
@@ -19,3 +20,5 @@ server_scripts {
 }
 
 lua54 'yes'
+
+dependency 'ox_lib'
